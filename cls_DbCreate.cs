@@ -41,6 +41,13 @@ namespace Stock_Taking_Tool
                 }
             }
         }
+        public class cls_Item
+        {
+            public string Prod_Code;
+            public string Prod_Name;
+            public string Barcode;
+            public double Selling_Price;
+        }
         public static HashSet<string> GetLocalCodes()
         {
             var Set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -226,25 +233,25 @@ namespace Stock_Taking_Tool
             }
             return dt;
         }
-        public static void AddTemp(string Unit_no, string Prod_Code,string Barcode , string Prod_Name, double Qty, double Selling_Price)
+        public static void AddTemp(string Unit_no, cls_Item item, double Qty)
         {
             using (var con = new SQLiteConnection(ConnStr))
             {
                 con.Open();
-                string sql = "INSERT INTO Temp_Transaction (Unit_No, Prod_Code, Prod_Name, Barcode,  Qty, Selling_Price) VALUES (@u, @c, @n, @b, @q, @p)";
+                string sql = "INSERT INTO Temp_Transaction (Unit_No, Prod_Code, Prod_Name, Barcode, Qty, Selling_Price) VALUES (@u, @c, @n, @b, @q, @p)";
                 using (var cmd = new SQLiteCommand(sql, con))
                 {
                     cmd.Parameters.AddWithValue("@u", Unit_no);
-                    cmd.Parameters.AddWithValue("@c", Prod_Code);
-                    cmd.Parameters.AddWithValue("@n", Prod_Name);
-                    cmd.Parameters.AddWithValue("@b", Barcode);
+                    cmd.Parameters.AddWithValue("@c", item.Prod_Code);
+                    cmd.Parameters.AddWithValue("@n", item.Prod_Name);
+                    cmd.Parameters.AddWithValue("@b", item.Barcode);
                     cmd.Parameters.AddWithValue("@q", Qty);
-                    cmd.Parameters.AddWithValue("@p", Selling_Price);
+                    cmd.Parameters.AddWithValue("@p", item.Selling_Price);
                     cmd.ExecuteNonQuery();
                 }
             }
         }
-        public static void AddorUpdateTempTransaction(string Unit_no, string Prod_Code,  string Prod_Name, string Barcode, double Qty, double Selling_Price)
+        public static void AddorUpdateTempTransaction(string Unit_no,cls_Item Item, double Qty)
         {
             bool updated = false;
             using (var con = new SQLiteConnection(ConnStr))
@@ -254,12 +261,12 @@ namespace Stock_Taking_Tool
                 using (var cmd = new SQLiteCommand(sql, con))
                 {
                     cmd.Parameters.AddWithValue("@q", Qty);
-                    cmd.Parameters.AddWithValue("@p", Selling_Price);
-                    cmd.Parameters.AddWithValue("@c", Prod_Code);
+                    cmd.Parameters.AddWithValue("@p", Item.Selling_Price);
+                    cmd.Parameters.AddWithValue("@c", Item.Prod_Code);
                     updated = cmd.ExecuteNonQuery() > 0;
                 }
             }
-            if(!updated)AddTemp(Unit_no, Prod_Code, Barcode, Prod_Name, Qty, Selling_Price);
+            if(!updated)AddTemp(Unit_no,  Item,  Qty);
         }
         public static DataTable GetTemp()
         {

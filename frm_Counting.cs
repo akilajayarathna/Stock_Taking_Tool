@@ -73,6 +73,7 @@ namespace Stock_Taking_Tool
         private void btn_Item_Find_Click(object sender, EventArgs e)
         {
             string text = txt_Item_enter.Text.Trim();
+            
             if (text == "") return;
 
             if(chk_Error.Checked)
@@ -95,9 +96,8 @@ namespace Stock_Taking_Tool
                 txt_Item_enter.Focus();
                 return;
             }
-
-            string code,  name, barcode;
-            double price;
+            cls_DbCreate.cls_Item item;
+            
 
             using (var f = new frm_Item_Find(dt))
             {
@@ -107,15 +107,18 @@ namespace Stock_Taking_Tool
                     txt_Item_enter.Focus();
                     return;
                 }
-                code = f.SelCode;
-                name = f.SelName;
-                barcode = f.SelBarcode;
-                price = f.SelPrice;
+                item = new cls_DbCreate.cls_Item
+                {
+                    Prod_Code = f.SelCode,
+                    Prod_Name = f.SelName,
+                    Barcode = f.SelBarcode,
+                    Selling_Price = f.SelPrice
+                };
             }
             if (rdo_Manual.Checked)
             {
                 double qty;
-                using (var q = new frm_Qty(name, price))
+                using (var q = new frm_Qty(item.Prod_Name, item.Selling_Price))
                 {
                     if (q.ShowDialog(this) != DialogResult.OK)
                     {
@@ -125,11 +128,11 @@ namespace Stock_Taking_Tool
                     }
                     qty = q.Qty;
                 }
-                cls_DbCreate.AddorUpdateTempTransaction(Unit, code, name, barcode, qty, price);
+                cls_DbCreate.AddorUpdateTempTransaction(Unit, item, qty);
             }
             else
             {
-                cls_DbCreate.AddTemp(Unit, code, name, barcode,  1, price);
+                cls_DbCreate.AddTemp(Unit, item,  1);
             }
             txt_Item_enter.Clear();
             LoadGrid();
@@ -176,7 +179,7 @@ namespace Stock_Taking_Tool
         private void LoadGrid()
         {
             dgv_Transaction.DataSource = cls_DbCreate.GetTemp();
-            if (dgv_Transaction.Columns["Id"] != null) dgv_Transaction.Columns["Id"].Visible = false;
+            if (dgv_Transaction.Columns["id"] != null) dgv_Transaction.Columns["id"].Visible = false;
             if (dgv_Transaction.Rows.Count > 0) dgv_Transaction.FirstDisplayedScrollingRowIndex = dgv_Transaction.Rows.Count - 1;
         }
         private void btn_Save_Click(object sender, EventArgs e)
