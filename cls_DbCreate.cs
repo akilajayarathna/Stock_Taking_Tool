@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data;
+using System.Diagnostics;
 
 namespace Stock_Taking_Tool
 {
@@ -210,6 +211,74 @@ namespace Stock_Taking_Tool
             string Unit_No, Machine_Id;
             GetSystemDetails(out Unit_No, out Machine_Id);
             return Unit_No;
+        }
+        public static int ReplaceCashier(List<string[]> rows, Action<int> onProgress = null)
+        {
+            int skipped = 0, processed = 0;
+            var seen = new HashSet<string>();
+
+            using (var con = new SQLiteConnection(ConnStr))
+            {
+                con.Open();
+                using (var tx = con.BeginTransaction())
+                {
+                    using (var del = new SQLiteCommand("DELETE FROM Pos_Employee", con,tx))
+                    {
+                        del.ExecuteNonQuery();
+                    }
+                    using (var ins = new SQLiteCommand("INSERT INTO Pos_Employee (Emp_Name, Password) VALUES(@n,@p)", con,tx))
+                    {
+                        var pn = ins.Parameters.AddWithValue("@n", "");
+                        var pp = ins.Parameters.AddWithValue("@p", "");
+
+                        foreach(var r in rows)
+                        {
+                            processed++;
+                            if (onProgress != null && processed % 20 == 0) onProgress(processed);
+                            string name = (r[0] ?? "").Trim();
+                            string pass = (r[1] ?? "").Trim();
+                            if (name == "" || pass == "") continue;
+                            if(!seen.Add(pass)) { skipped++; continue; }
+
+                            pn.Value = name;
+                            pp.Value = pass;
+                            ins.ExecuteNonQuery();
+                        }
+                    }
+                    tx.Commit();
+                }
+            }
+            if (onProgress != null) onProgress(rows.Count);
+            return skipped;
+        }
+
+        public static string FindCashierByPassword(string password)
+        {
+            using (var con = new SQLiteConnection(ConnStr))
+            {
+                con.Open();
+                using (var cmd = new SQLiteCommand ("SELECT Emp_Name FROM Pos_Employee WHERE Password = @p", con))
+                {
+                    cmd.Parameters.AddWithValue("@p", (password ?? "").Trim());
+                    object v = cmd.ExecuteScalar();
+                    return v == null ? "" : v.ToString();
+                }
+            }
+        }
+
+        public static DataTable GetCashierForView()
+        {
+            var dt = new DataTable();
+            using (var con = new SQLiteConnection(ConnStr))
+            {
+                con.Open();
+                using (var cmd = new SQLiteCommand("SELECT Emp_Name,Password FROM Pos_Employee ORDER BY Emp_Name", con))
+                using (var rd = cmd.ExecuteReader())
+                {
+                    dt.Load(rd);
+                }
+            }
+            return dt;
         }
         public static DataTable FindProduct(string text)
         {

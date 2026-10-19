@@ -31,7 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_Stock_Taking_Tool));
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.pb_Download = new System.Windows.Forms.ProgressBar();
+            this.btn_Cashier_Download = new System.Windows.Forms.Button();
             this.btn_Counting = new System.Windows.Forms.Button();
             this.btn_Download = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -39,7 +40,6 @@
             this.settingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pb_Download = new System.Windows.Forms.ProgressBar();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -58,7 +58,7 @@
             // panel2
             // 
             this.panel2.Controls.Add(this.pb_Download);
-            this.panel2.Controls.Add(this.button1);
+            this.panel2.Controls.Add(this.btn_Cashier_Download);
             this.panel2.Controls.Add(this.btn_Counting);
             this.panel2.Controls.Add(this.btn_Download);
             this.panel2.Location = new System.Drawing.Point(0, 31);
@@ -66,20 +66,30 @@
             this.panel2.Size = new System.Drawing.Size(2031, 101);
             this.panel2.TabIndex = 1;
             // 
-            // button1
+            // pb_Download
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(214, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(196, 58);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Cashier Download";
-            this.button1.UseVisualStyleBackColor = true;
+            this.pb_Download.Location = new System.Drawing.Point(3, 67);
+            this.pb_Download.Name = "pb_Download";
+            this.pb_Download.Size = new System.Drawing.Size(407, 23);
+            this.pb_Download.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pb_Download.TabIndex = 3;
+            this.pb_Download.Visible = false;
+            // 
+            // btn_Cashier_Download
+            // 
+            this.btn_Cashier_Download.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Cashier_Download.Location = new System.Drawing.Point(214, 3);
+            this.btn_Cashier_Download.Name = "btn_Cashier_Download";
+            this.btn_Cashier_Download.Size = new System.Drawing.Size(196, 58);
+            this.btn_Cashier_Download.TabIndex = 2;
+            this.btn_Cashier_Download.Text = "Cashier Download";
+            this.btn_Cashier_Download.UseVisualStyleBackColor = true;
+            this.btn_Cashier_Download.Click += new System.EventHandler(this.btn_Cashier_Download_Click);
             // 
             // btn_Counting
             // 
             this.btn_Counting.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Counting.Location = new System.Drawing.Point(520, 3);
+            this.btn_Counting.Location = new System.Drawing.Point(431, 3);
             this.btn_Counting.Name = "btn_Counting";
             this.btn_Counting.Size = new System.Drawing.Size(196, 58);
             this.btn_Counting.TabIndex = 1;
@@ -138,15 +148,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // pb_Download
-            // 
-            this.pb_Download.Location = new System.Drawing.Point(3, 67);
-            this.pb_Download.Name = "pb_Download";
-            this.pb_Download.Size = new System.Drawing.Size(407, 23);
-            this.pb_Download.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.pb_Download.TabIndex = 3;
-            this.pb_Download.Visible = false;
-            // 
             // frm_Stock_Taking_Tool
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -177,7 +178,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btn_Download;
         private System.Windows.Forms.Button btn_Counting;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btn_Cashier_Download;
         private System.Windows.Forms.ProgressBar pb_Download;
     }
 }

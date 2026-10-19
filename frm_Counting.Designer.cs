@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.btn_Save_and_Print = new System.Windows.Forms.Button();
@@ -35,6 +36,16 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.btn_Item_Find = new System.Windows.Forms.Button();
             this.txt_Item_enter = new System.Windows.Forms.TextBox();
+            this.dgv_Transaction = new System.Windows.Forms.DataGridView();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lbl_User = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lbl_Unit_No = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btn_Void = new System.Windows.Forms.Button();
+            this.chk_Error = new System.Windows.Forms.CheckBox();
+            this.rdo_Manual = new System.Windows.Forms.RadioButton();
+            this.rdo_Auto = new System.Windows.Forms.RadioButton();
             this.panel4 = new System.Windows.Forms.Panel();
             this.btn_Back = new System.Windows.Forms.Button();
             this.btn_Zero = new System.Windows.Forms.Button();
@@ -48,51 +59,41 @@
             this.btn_Nine = new System.Windows.Forms.Button();
             this.btn_Eight = new System.Windows.Forms.Button();
             this.btn_Seven = new System.Windows.Forms.Button();
-            this.dgv_Transaction = new System.Windows.Forms.DataGridView();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.lbl_User = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lbl_Unit_No = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btn_Void = new System.Windows.Forms.Button();
-            this.chk_Error = new System.Windows.Forms.CheckBox();
-            this.rdo_Manual = new System.Windows.Forms.RadioButton();
-            this.rdo_Auto = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel5.SuspendLayout();
-            this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Transaction)).BeginInit();
             this.panel2.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.panel5);
+            this.panel1.Controls.Add(this.btn_Save);
+            this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.btn_Save_and_Print);
             this.panel1.Controls.Add(this.panel3);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1924, 966);
+            this.panel1.Size = new System.Drawing.Size(2062, 966);
             this.panel1.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.btn_Save_and_Print);
-            this.panel3.Controls.Add(this.btn_Save);
-            this.panel3.Controls.Add(this.panel5);
-            this.panel3.Controls.Add(this.panel4);
             this.panel3.Controls.Add(this.dgv_Transaction);
             this.panel3.Location = new System.Drawing.Point(3, 101);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(2061, 862);
+            this.panel3.Size = new System.Drawing.Size(1391, 728);
             this.panel3.TabIndex = 1;
             // 
             // btn_Save_and_Print
             // 
             this.btn_Save_and_Print.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Save_and_Print.Location = new System.Drawing.Point(1745, 739);
+            this.btn_Save_and_Print.Location = new System.Drawing.Point(1781, 833);
             this.btn_Save_and_Print.Name = "btn_Save_and_Print";
             this.btn_Save_and_Print.Size = new System.Drawing.Size(199, 113);
             this.btn_Save_and_Print.TabIndex = 8;
@@ -103,7 +104,7 @@
             // btn_Save
             // 
             this.btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Save.Location = new System.Drawing.Point(1466, 739);
+            this.btn_Save.Location = new System.Drawing.Point(1457, 833);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(199, 113);
             this.btn_Save.TabIndex = 7;
@@ -114,19 +115,19 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel5.Controls.Add(this.btn_Item_Find);
             this.panel5.Controls.Add(this.txt_Item_enter);
-            this.panel5.Location = new System.Drawing.Point(3, 731);
+            this.panel5.Controls.Add(this.btn_Item_Find);
+            this.panel5.Location = new System.Drawing.Point(3, 833);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1384, 121);
+            this.panel5.Size = new System.Drawing.Size(1391, 121);
             this.panel5.TabIndex = 2;
             // 
             // btn_Item_Find
             // 
             this.btn_Item_Find.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Item_Find.Location = new System.Drawing.Point(1154, 22);
+            this.btn_Item_Find.Location = new System.Drawing.Point(1195, 17);
             this.btn_Item_Find.Name = "btn_Item_Find";
-            this.btn_Item_Find.Size = new System.Drawing.Size(181, 71);
+            this.btn_Item_Find.Size = new System.Drawing.Size(181, 95);
             this.btn_Item_Find.TabIndex = 6;
             this.btn_Item_Find.Text = "find";
             this.btn_Item_Find.UseVisualStyleBackColor = true;
@@ -134,12 +135,134 @@
             // 
             // txt_Item_enter
             // 
-            this.txt_Item_enter.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Item_enter.Location = new System.Drawing.Point(17, 47);
+            this.txt_Item_enter.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Item_enter.Location = new System.Drawing.Point(3, 41);
             this.txt_Item_enter.Name = "txt_Item_enter";
-            this.txt_Item_enter.Size = new System.Drawing.Size(1122, 45);
+            this.txt_Item_enter.Size = new System.Drawing.Size(1186, 53);
             this.txt_Item_enter.TabIndex = 0;
             this.txt_Item_enter.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_Item_enter_KeyDown);
+            // 
+            // dgv_Transaction
+            // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_Transaction.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgv_Transaction.ColumnHeadersHeight = 29;
+            this.dgv_Transaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgv_Transaction.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_Transaction.Location = new System.Drawing.Point(0, 0);
+            this.dgv_Transaction.Name = "dgv_Transaction";
+            this.dgv_Transaction.RowHeadersWidth = 51;
+            this.dgv_Transaction.RowTemplate.Height = 24;
+            this.dgv_Transaction.Size = new System.Drawing.Size(1389, 726);
+            this.dgv_Transaction.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.lbl_User);
+            this.panel2.Controls.Add(this.label3);
+            this.panel2.Controls.Add(this.lbl_Unit_No);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.btn_Void);
+            this.panel2.Controls.Add(this.chk_Error);
+            this.panel2.Controls.Add(this.rdo_Manual);
+            this.panel2.Controls.Add(this.rdo_Auto);
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(2230, 92);
+            this.panel2.TabIndex = 0;
+            // 
+            // lbl_User
+            // 
+            this.lbl_User.AutoSize = true;
+            this.lbl_User.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_User.Location = new System.Drawing.Point(974, 29);
+            this.lbl_User.Name = "lbl_User";
+            this.lbl_User.Size = new System.Drawing.Size(169, 36);
+            this.lbl_User.TabIndex = 7;
+            this.lbl_User.Text = "Cashier 01";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(848, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(100, 36);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "User :";
+            // 
+            // lbl_Unit_No
+            // 
+            this.lbl_Unit_No.AutoSize = true;
+            this.lbl_Unit_No.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Unit_No.Location = new System.Drawing.Point(685, 29);
+            this.lbl_Unit_No.Name = "lbl_Unit_No";
+            this.lbl_Unit_No.Size = new System.Drawing.Size(51, 36);
+            this.lbl_Unit_No.TabIndex = 5;
+            this.lbl_Unit_No.Text = "01";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(529, 28);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(150, 36);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Unit  No :";
+            // 
+            // btn_Void
+            // 
+            this.btn_Void.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Void.Location = new System.Drawing.Point(1826, 24);
+            this.btn_Void.Name = "btn_Void";
+            this.btn_Void.Size = new System.Drawing.Size(118, 46);
+            this.btn_Void.TabIndex = 3;
+            this.btn_Void.Text = "Void";
+            this.btn_Void.UseVisualStyleBackColor = true;
+            this.btn_Void.Click += new System.EventHandler(this.btn_Void_Click);
+            // 
+            // chk_Error
+            // 
+            this.chk_Error.AutoSize = true;
+            this.chk_Error.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chk_Error.Location = new System.Drawing.Point(1676, 29);
+            this.chk_Error.Name = "chk_Error";
+            this.chk_Error.Size = new System.Drawing.Size(101, 35);
+            this.chk_Error.TabIndex = 2;
+            this.chk_Error.Text = "Error";
+            this.chk_Error.UseVisualStyleBackColor = true;
+            // 
+            // rdo_Manual
+            // 
+            this.rdo_Manual.AutoSize = true;
+            this.rdo_Manual.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_Manual.Location = new System.Drawing.Point(155, 29);
+            this.rdo_Manual.Name = "rdo_Manual";
+            this.rdo_Manual.Size = new System.Drawing.Size(123, 33);
+            this.rdo_Manual.TabIndex = 1;
+            this.rdo_Manual.TabStop = true;
+            this.rdo_Manual.Text = "Manual";
+            this.rdo_Manual.UseVisualStyleBackColor = true;
+            // 
+            // rdo_Auto
+            // 
+            this.rdo_Auto.AutoSize = true;
+            this.rdo_Auto.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdo_Auto.Location = new System.Drawing.Point(21, 29);
+            this.rdo_Auto.Name = "rdo_Auto";
+            this.rdo_Auto.Size = new System.Drawing.Size(90, 33);
+            this.rdo_Auto.TabIndex = 0;
+            this.rdo_Auto.TabStop = true;
+            this.rdo_Auto.Text = "Auto";
+            this.rdo_Auto.UseVisualStyleBackColor = true;
             // 
             // panel4
             // 
@@ -156,7 +279,7 @@
             this.panel4.Controls.Add(this.btn_Nine);
             this.panel4.Controls.Add(this.btn_Eight);
             this.panel4.Controls.Add(this.btn_Seven);
-            this.panel4.Location = new System.Drawing.Point(1393, 3);
+            this.panel4.Location = new System.Drawing.Point(1400, 97);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(659, 730);
             this.panel4.TabIndex = 1;
@@ -283,123 +406,11 @@
             this.btn_Seven.Text = "7";
             this.btn_Seven.UseVisualStyleBackColor = true;
             // 
-            // dgv_Transaction
-            // 
-            this.dgv_Transaction.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_Transaction.Location = new System.Drawing.Point(3, 3);
-            this.dgv_Transaction.Name = "dgv_Transaction";
-            this.dgv_Transaction.RowHeadersWidth = 51;
-            this.dgv_Transaction.RowTemplate.Height = 24;
-            this.dgv_Transaction.Size = new System.Drawing.Size(1384, 712);
-            this.dgv_Transaction.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.lbl_User);
-            this.panel2.Controls.Add(this.label3);
-            this.panel2.Controls.Add(this.lbl_Unit_No);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Controls.Add(this.btn_Void);
-            this.panel2.Controls.Add(this.chk_Error);
-            this.panel2.Controls.Add(this.rdo_Manual);
-            this.panel2.Controls.Add(this.rdo_Auto);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(2230, 92);
-            this.panel2.TabIndex = 0;
-            // 
-            // lbl_User
-            // 
-            this.lbl_User.AutoSize = true;
-            this.lbl_User.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_User.Location = new System.Drawing.Point(974, 29);
-            this.lbl_User.Name = "lbl_User";
-            this.lbl_User.Size = new System.Drawing.Size(169, 36);
-            this.lbl_User.TabIndex = 7;
-            this.lbl_User.Text = "Cashier 01";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(848, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 36);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "User :";
-            // 
-            // lbl_Unit_No
-            // 
-            this.lbl_Unit_No.AutoSize = true;
-            this.lbl_Unit_No.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Unit_No.Location = new System.Drawing.Point(685, 29);
-            this.lbl_Unit_No.Name = "lbl_Unit_No";
-            this.lbl_Unit_No.Size = new System.Drawing.Size(51, 36);
-            this.lbl_Unit_No.TabIndex = 5;
-            this.lbl_Unit_No.Text = "01";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(529, 28);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(150, 36);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Unit  No :";
-            // 
-            // btn_Void
-            // 
-            this.btn_Void.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Void.Location = new System.Drawing.Point(1826, 24);
-            this.btn_Void.Name = "btn_Void";
-            this.btn_Void.Size = new System.Drawing.Size(118, 46);
-            this.btn_Void.TabIndex = 3;
-            this.btn_Void.Text = "Void";
-            this.btn_Void.UseVisualStyleBackColor = true;
-            this.btn_Void.Click += new System.EventHandler(this.btn_Void_Click);
-            // 
-            // chk_Error
-            // 
-            this.chk_Error.AutoSize = true;
-            this.chk_Error.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk_Error.Location = new System.Drawing.Point(1676, 29);
-            this.chk_Error.Name = "chk_Error";
-            this.chk_Error.Size = new System.Drawing.Size(101, 35);
-            this.chk_Error.TabIndex = 2;
-            this.chk_Error.Text = "Error";
-            this.chk_Error.UseVisualStyleBackColor = true;
-            // 
-            // rdo_Manual
-            // 
-            this.rdo_Manual.AutoSize = true;
-            this.rdo_Manual.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_Manual.Location = new System.Drawing.Point(155, 29);
-            this.rdo_Manual.Name = "rdo_Manual";
-            this.rdo_Manual.Size = new System.Drawing.Size(123, 33);
-            this.rdo_Manual.TabIndex = 1;
-            this.rdo_Manual.TabStop = true;
-            this.rdo_Manual.Text = "Manual";
-            this.rdo_Manual.UseVisualStyleBackColor = true;
-            // 
-            // rdo_Auto
-            // 
-            this.rdo_Auto.AutoSize = true;
-            this.rdo_Auto.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdo_Auto.Location = new System.Drawing.Point(21, 29);
-            this.rdo_Auto.Name = "rdo_Auto";
-            this.rdo_Auto.Size = new System.Drawing.Size(90, 33);
-            this.rdo_Auto.TabIndex = 0;
-            this.rdo_Auto.TabStop = true;
-            this.rdo_Auto.Text = "Auto";
-            this.rdo_Auto.UseVisualStyleBackColor = true;
-            // 
             // frm_Counting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1924, 966);
+            this.ClientSize = new System.Drawing.Size(2062, 966);
             this.Controls.Add(this.panel1);
             this.Name = "frm_Counting";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -410,10 +421,10 @@
             this.panel3.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
-            this.panel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Transaction)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

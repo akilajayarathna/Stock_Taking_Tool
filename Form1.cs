@@ -124,5 +124,77 @@ namespace Stock_Taking_Tool
             }
 
         }
+
+        private async Task btn_Cashier_Download_Click(object sender, EventArgs e)
+        {
+            if(!cls_MainDb.IsConfigurd)
+            {
+                MessageBox.Show("Setup to mMain DB Connection...");
+                return;
+            }
+            btn_Cashier_Download.Enabled = false;
+            btn_Download.Enabled = false;
+            pb_Download.Value = 0;
+            pb_Download.Visible = true;
+
+            var progress = new Progress<int>(p => pb_Download.Value = Math.Max(0, Math.Min(100, p)));
+
+            try
+            {
+                string connStr = cls_MainDb.ConnectionString;
+                int[] result = await Task.Run(() => DoDownloadCashier(connStr, progress));
+
+                pb_Download.Value = 100;
+                MessageBox.Show(result[0] + "Faind Casher." + (result[1] > 0 ? "\n" + result[1] + " Find Same PAssword then Skiped it" : ""));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Cashier Download Faield:\n" + ex.Message);
+            }
+            finally
+            {
+                pb_Download.Visible = false;
+                btn_Cashier_Download.Enabled = true;
+                btn_Download.Enabled = true;
+            }
+        }
+
+        private int[] DoDownloadCashier(string connStr,IProgress<int> progress)
+        {
+            var rows = new List<string[]>();
+
+            using(var main = new SqlConnection(connStr))
+            {
+                main.Open();
+                progress.Report(10);
+
+                int total;
+                using (var cmd = new SqlCommand("SELECT COUNT(*) FROM dbo.tb_CashierDetails WITH (NOLOCK)", main))
+                {
+                    total = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+                using (var cmd= new SqlCommand("SELECT Emp_Name AS N, Password AS p FROM dbo.tb_CashierDetails WITH (NOLOCK)", main))
+                using (var rd = cmd.ExecuteReader())
+                {
+                    int IN = rd.GetOrdinal("N"), IP = rd.GetOrdinal("P");
+                    int n = 0;
+                    while (rd.Read())
+                    {
+                        n++;
+                        rows.Add(new string[]
+                        {
+                            rd.IsDBNull(IN) ? "" : rd.GetValue(IN).ToString(),
+                            rd.IsDBNull(IP) ? "" : rd.GetValue(IP).ToString()
+                        });
+                        if (total > 0) progress.Report(10 + (int)(50L * n / total));
+                    }
+                }
+            }
+            int skipped = cls_DbCreate.ReplaceCashier(rows, done =>
+            {
+                if (rows.Count > 0) progress.Report(60 + (int)(40L * done / rows.Count));
+            });
+            return new int[] { rows.Count, skipped };
+        }
     }
 }

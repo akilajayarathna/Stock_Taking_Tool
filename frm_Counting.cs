@@ -38,6 +38,7 @@ namespace Stock_Taking_Tool
             dgv_Transaction.AllowUserToAddRows = false;
             dgv_Transaction.MultiSelect = false;
             dgv_Transaction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            lbl_Unit_No.Text = cls_DbCreate.GetUnit_No();
 
             rdo_Auto.Checked = true;
             LoadGrid();
@@ -180,6 +181,19 @@ namespace Stock_Taking_Tool
         {
             dgv_Transaction.DataSource = cls_DbCreate.GetTemp();
             if (dgv_Transaction.Columns["id"] != null) dgv_Transaction.Columns["id"].Visible = false;
+            var price = dgv_Transaction.Columns["Selling_Price"];
+                if(price != null)
+                {
+                    price.DefaultCellStyle.Format = "N2";
+                    price.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                }
+            var qty = dgv_Transaction.Columns["Qty"];
+            if(qty != null)
+            {
+                qty.DefaultCellStyle.Format = "0.##";
+                qty.DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
+            }
+
             if (dgv_Transaction.Rows.Count > 0) dgv_Transaction.FirstDisplayedScrollingRowIndex = dgv_Transaction.Rows.Count - 1;
         }
         private void btn_Save_Click(object sender, EventArgs e)
