@@ -38,6 +38,13 @@ namespace Stock_Taking_Tool
             dgv_Transaction.AllowUserToAddRows = false;
             dgv_Transaction.MultiSelect = false;
             dgv_Transaction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            // make total column width same as dgv full width
+
+            dgv_Transaction.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgv_Transaction.RowHeadersVisible = false;
+            // ---------------
+
             lbl_Unit_No.Text = cls_DbCreate.GetUnit_No();
             //lbl_User.Text = cls_DbCreate.GetCasher_Name();
 
@@ -194,6 +201,16 @@ namespace Stock_Taking_Tool
                 qty.DefaultCellStyle.Format = "0.##";
                 qty.DefaultCellStyle.Alignment = DataGridViewContentAlignment.BottomRight;
             }
+
+            // Data Grid View column sizes change
+
+            if (dgv_Transaction.Columns["Prod_Code"] != null) dgv_Transaction.Columns["Prod_Code"].FillWeight = 80;
+            if (dgv_Transaction.Columns["Prod_Name"] != null) dgv_Transaction.Columns["Prod_Name"].FillWeight = 200;
+            if (dgv_Transaction.Columns["Barcode"] != null) dgv_Transaction.Columns["Barcode"].FillWeight = 100;
+            if (dgv_Transaction.Columns["Qty"] != null) dgv_Transaction.Columns["Qty"].FillWeight = 50;
+            if (dgv_Transaction.Columns["Selling_Price"] != null) dgv_Transaction.Columns["Selling_Price"].FillWeight = 80;
+
+            // ----------------------------------
 
             if (dgv_Transaction.Rows.Count > 0) dgv_Transaction.FirstDisplayedScrollingRowIndex = dgv_Transaction.Rows.Count - 1;
         }
