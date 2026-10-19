@@ -251,7 +251,6 @@ namespace Stock_Taking_Tool
             if (onProgress != null) onProgress(rows.Count);
             return skipped;
         }
-
         public static string FindCashierByPassword(string password)
         {
             using (var con = new SQLiteConnection(ConnStr))
@@ -265,8 +264,7 @@ namespace Stock_Taking_Tool
                 }
             }
         }
-
-        public static DataTable GetCashierForView()
+        public static DataTable GetCasher_Name()
         {
             var dt = new DataTable();
             using (var con = new SQLiteConnection(ConnStr))

@@ -39,6 +39,7 @@ namespace Stock_Taking_Tool
             dgv_Transaction.MultiSelect = false;
             dgv_Transaction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             lbl_Unit_No.Text = cls_DbCreate.GetUnit_No();
+            //lbl_User.Text = cls_DbCreate.GetCasher_Name();
 
             rdo_Auto.Checked = true;
             LoadGrid();
