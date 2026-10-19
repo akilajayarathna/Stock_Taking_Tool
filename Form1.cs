@@ -108,7 +108,7 @@ namespace Stock_Taking_Tool
                     }
                 }
             }
-            report(70, rows.Count + "Find the new Items");
+            report(70, rows.Count + "  Find the new Items");
             int added = cls_DbCreate.AddNewProduct(rows, done =>
             {
                 if (rows.Count > 0) report(70 + (int)(30L * done / rows.Count), "Saving..." + done + "/" + rows.Count);
@@ -125,11 +125,12 @@ namespace Stock_Taking_Tool
 
         }
 
-        private async Task btn_Cashier_Download_Click(object sender, EventArgs e)
+        private async void btn_Cashier_Download_Click(object sender, EventArgs e)
         {
-            if(!cls_MainDb.IsConfigurd)
+            //if (!cls_Session.RequireAdmin(this)) return;
+            if (!cls_MainDb.IsConfigurd)
             {
-                MessageBox.Show("Setup to mMain DB Connection...");
+                MessageBox.Show("Setup to Main DB Connection...");
                 return;
             }
             btn_Cashier_Download.Enabled = false;
@@ -145,7 +146,7 @@ namespace Stock_Taking_Tool
                 int[] result = await Task.Run(() => DoDownloadCashier(connStr, progress));
 
                 pb_Download.Value = 100;
-                MessageBox.Show(result[0] + "Faind Casher." + (result[1] > 0 ? "\n" + result[1] + " Find Same PAssword then Skiped it" : ""));
+                MessageBox.Show(result[0] + "Faind Casher." + (result[1] > 0 ? "\n" + result[1] + " Find Same Password then Skiped it" : ""));
             }
             catch (Exception ex)
             {
@@ -173,7 +174,7 @@ namespace Stock_Taking_Tool
                 {
                     total = Convert.ToInt32(cmd.ExecuteScalar());
                 }
-                using (var cmd= new SqlCommand("SELECT Emp_Name AS N, Password AS p FROM dbo.tb_CashierDetails WITH (NOLOCK)", main))
+                using (var cmd= new SqlCommand("SELECT Emp_Name AS N, Pass_Word AS p FROM dbo.tb_CashierDetails WITH (NOLOCK)", main))
                 using (var rd = cmd.ExecuteReader())
                 {
                     int IN = rd.GetOrdinal("N"), IP = rd.GetOrdinal("P");
