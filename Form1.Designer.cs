@@ -57,6 +57,7 @@
             // 
             // panel2
             // 
+            this.panel2.BackColor = System.Drawing.Color.White;
             this.panel2.Controls.Add(this.pb_Download);
             this.panel2.Controls.Add(this.btn_Cashier_Download);
             this.panel2.Controls.Add(this.btn_Counting);
@@ -77,35 +78,38 @@
             // 
             // btn_Cashier_Download
             // 
+            this.btn_Cashier_Download.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(224)))), ((int)(((byte)(198)))));
             this.btn_Cashier_Download.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Cashier_Download.Location = new System.Drawing.Point(214, 3);
+            this.btn_Cashier_Download.Location = new System.Drawing.Point(234, 3);
             this.btn_Cashier_Download.Name = "btn_Cashier_Download";
-            this.btn_Cashier_Download.Size = new System.Drawing.Size(196, 58);
+            this.btn_Cashier_Download.Size = new System.Drawing.Size(220, 58);
             this.btn_Cashier_Download.TabIndex = 2;
             this.btn_Cashier_Download.Text = "Cashier Download";
-            this.btn_Cashier_Download.UseVisualStyleBackColor = true;
+            this.btn_Cashier_Download.UseVisualStyleBackColor = false;
             this.btn_Cashier_Download.Click += new System.EventHandler(this.btn_Cashier_Download_Click);
             // 
             // btn_Counting
             // 
+            this.btn_Counting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(146)))), ((int)(((byte)(167)))), ((int)(((byte)(224)))));
             this.btn_Counting.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Counting.Location = new System.Drawing.Point(431, 3);
+            this.btn_Counting.Location = new System.Drawing.Point(465, 3);
             this.btn_Counting.Name = "btn_Counting";
-            this.btn_Counting.Size = new System.Drawing.Size(196, 58);
+            this.btn_Counting.Size = new System.Drawing.Size(220, 58);
             this.btn_Counting.TabIndex = 1;
-            this.btn_Counting.Text = "Counting";
-            this.btn_Counting.UseVisualStyleBackColor = true;
+            this.btn_Counting.Text = "Stock Counting";
+            this.btn_Counting.UseVisualStyleBackColor = false;
             this.btn_Counting.Click += new System.EventHandler(this.btn_Counting_Click);
             // 
             // btn_Download
             // 
+            this.btn_Download.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(223)))), ((int)(((byte)(146)))));
             this.btn_Download.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Download.Location = new System.Drawing.Point(3, 3);
             this.btn_Download.Name = "btn_Download";
-            this.btn_Download.Size = new System.Drawing.Size(196, 58);
+            this.btn_Download.Size = new System.Drawing.Size(220, 58);
             this.btn_Download.TabIndex = 0;
             this.btn_Download.Text = "Item Download";
-            this.btn_Download.UseVisualStyleBackColor = true;
+            this.btn_Download.UseVisualStyleBackColor = false;
             this.btn_Download.Click += new System.EventHandler(this.btn_Download_Click);
             // 
             // menuStrip1
