@@ -16,7 +16,15 @@ namespace Stock_Taking_Tool
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+
+            using (var login = new frm_Loging())
+            {
+                if (login.ShowDialog() != DialogResult.OK)
+                    return;
+            }
+            cls_MainDb.Load();
+            cls_DbCreate.Init();
+                Application.Run(new frm_Stock_Taking_Tool());
         }
     }
 }

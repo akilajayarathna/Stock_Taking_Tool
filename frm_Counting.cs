@@ -1,0 +1,299 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Printing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Stock_Taking_Tool
+{
+    public partial class frm_Counting : Form
+    {
+        private DataTable printData;
+        private int printIndex;
+        private double printSubTotal;
+        public frm_Counting()
+        {
+            InitializeComponent();
+        }
+        private void frm_Counting_Load(object sender, EventArgs e)
+        {
+            btn_Item_Find.Click += btn_Item_Find_Click;
+            btn_Void.Click += btn_Void_Click;
+            btn_Save.Click += btn_Save_Click;
+            btn_Save_and_Print.Click += btn_Save_and_Print_Click;
+            btn_Clear.Click += btn_Clear_Click;
+            btn_Back.Click += btn_Back_Click;
+            txt_Item_enter.KeyDown += txt_Item_enter_KeyDown;
+            chk_Error.CheckedChanged += delegate { txt_Item_enter.Focus(); };
+
+            foreach (Button b in new Button[] { btn_Zero, btn_One, btn_Two, btn_Three, btn_Four, btn_Five, btn_Six, btn_Seven, btn_Eight, btn_Nine })
+                b.Click += KeyPad_Click;
+
+            dgv_Transaction.ReadOnly = true;
+            dgv_Transaction.AllowUserToAddRows = false;
+            dgv_Transaction.MultiSelect = false;
+            dgv_Transaction.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            rdo_Auto.Checked = true;
+            LoadGrid();
+
+            ActiveControl = txt_Item_enter;
+            Shown += delegate { txt_Item_enter.Focus(); };
+        }
+        private void txt_Item_enter_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btn_Item_Find.PerformClick();
+            }
+        }
+        private void KeyPad_Click(object sender, EventArgs e)
+        {
+            txt_Item_enter.Text += ((Button)sender).Text;
+            txt_Item_enter.Focus();
+            txt_Item_enter.SelectionStart = txt_Item_enter.Text.Length;
+        }
+        private void btn_Clear_Click(object sender, EventArgs e)
+        {
+            txt_Item_enter.Clear();
+            txt_Item_enter.Focus();
+        }
+        private void btn_Back_Click(object sender, EventArgs e)
+        {
+            if (txt_Item_enter.Text.Length > 0) txt_Item_enter.Text = txt_Item_enter.Text.Substring(0, txt_Item_enter.Text.Length - 1);
+            txt_Item_enter.Focus();
+            txt_Item_enter.SelectionStart = txt_Item_enter.Text.Length;
+        }
+        private void btn_Item_Find_Click(object sender, EventArgs e)
+        {
+            string text = txt_Item_enter.Text.Trim();
+            if (text == "") return;
+
+            if(chk_Error.Checked)
+            {
+                DoError(text);
+                return;
+            }
+            string Unit = cls_DbCreate.GetUnit_No();
+            if(Unit == "")
+            {
+                MessageBox.Show("Save the unit no Using in Setting Form!!");
+                return;
+            }
+
+            DataTable dt = cls_DbCreate.FindProduct(text);
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show("Item Not Find");
+                txt_Item_enter.SelectAll();
+                txt_Item_enter.Focus();
+                return;
+            }
+
+            string code,  name, barcode;
+            double price;
+
+            using (var f = new frm_Item_Find(dt))
+            {
+                if(f.ShowDialog(this) != DialogResult.OK)
+                {
+                    txt_Item_enter.SelectAll();
+                    txt_Item_enter.Focus();
+                    return;
+                }
+                code = f.SelCode;
+                name = f.SelName;
+                barcode = f.SelBarcode;
+                price = f.SelPrice;
+            }
+            if (rdo_Manual.Checked)
+            {
+                double qty;
+                using (var q = new frm_Qty(name, price))
+                {
+                    if (q.ShowDialog(this) != DialogResult.OK)
+                    {
+                        txt_Item_enter.SelectAll();
+                        txt_Item_enter.Focus();
+                        return;
+                    }
+                    qty = q.Qty;
+                }
+                cls_DbCreate.AddorUpdateTempTransaction(Unit, code, name, barcode, qty, price);
+            }
+            else
+            {
+                cls_DbCreate.AddTemp(Unit, code, name, barcode,  1, price);
+            }
+            txt_Item_enter.Clear();
+            LoadGrid();
+            txt_Item_enter.Focus();
+        }
+        private void DoError(string text)
+        {
+            double n = 1;
+            string key = text;
+
+            int star = text.IndexOf('*');
+            if (star > 0)
+            {
+                double parsed;
+                if (!double.TryParse(text.Substring(0,star).Trim(), out parsed) || parsed <= 0)
+                {
+                    MessageBox.Show("Enter the Data Using ths format 5*1000001 ");
+                    txt_Item_enter.Focus();
+                    return;
+                }
+                n = parsed;
+                key = text.Substring(star + 1).Trim();
+            }
+            string msg = cls_DbCreate.ReduceQty(key, n);
+            if (msg != "") MessageBox.Show(msg);
+
+            chk_Error.Checked = false;
+            txt_Item_enter.Clear();
+            LoadGrid();
+            txt_Item_enter.Focus();
+        }
+        private void btn_Void_Click(object sender, EventArgs e)
+        {
+            if(dgv_Transaction.CurrentRow == null)
+            {
+                MessageBox.Show("Select the line..");
+                return;
+            }
+            long id = Convert.ToInt64(dgv_Transaction.CurrentRow.Cells["Id"].Value);
+            cls_DbCreate.VoidRow(id);
+            LoadGrid();
+            txt_Item_enter.Focus();
+        }
+        private void LoadGrid()
+        {
+            dgv_Transaction.DataSource = cls_DbCreate.GetTemp();
+            if (dgv_Transaction.Columns["Id"] != null) dgv_Transaction.Columns["Id"].Visible = false;
+            if (dgv_Transaction.Rows.Count > 0) dgv_Transaction.FirstDisplayedScrollingRowIndex = dgv_Transaction.Rows.Count - 1;
+        }
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            SaveBill(false);
+            txt_Item_enter.Focus();
+        }
+        private static double ToD(object o)
+        {
+            return (o == null || o == DBNull.Value) ? 0 : Convert.ToDouble(o);
+        }
+        private void btn_Save_and_Print_Click(object sender, EventArgs e)
+        {
+            SaveBill(true);
+        }
+        private void SaveBill(bool printAfter)
+        {
+            if(dgv_Transaction.Rows.Count ==0)
+            {
+                MessageBox.Show("There is a not data in a grid");
+                return;
+            }
+            if (MessageBox.Show("Items" + dgv_Transaction.Rows.Count + "Save?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes) return;
+
+            DataTable snapshot = cls_DbCreate.GetTemp();
+
+            try
+            {
+                int n = cls_DbCreate.SaveTransaction(cls_Session.Username ?? "");
+                LoadGrid();
+                if (!printAfter) MessageBox.Show(n + " Rows Saved");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Saved Failed : \n" + ex.Message);
+                return;
+            }
+            if (printAfter) PrintData(snapshot);
+
+            txt_Item_enter.Focus();
+        }
+        private void PrintData(DataTable data)
+        {
+            if(data == null || data.Rows.Count ==0)
+            {
+                MessageBox.Show("There is no data ina print");
+                return;
+            }
+            printData = data;
+
+            printSubTotal = 0;
+            foreach (DataRow r in printData.Rows) printSubTotal += ToD(r["Qty"]) * ToD(r["Selling_Price"]);
+
+            printIndex = 0;
+
+            var doc = new PrintDocument();
+            doc.PrintPage += Doc_PrintPage;
+
+            using (var dlg = new PrintPreviewDialog())
+            {
+                dlg.Document = doc;
+                doc.Print();
+            }
+            txt_Item_enter.Focus();
+        }
+        private void Doc_PrintPage(Object sender, PrintPageEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            float left = e.MarginBounds.Left;
+            float width = e.MarginBounds.Width;
+            float y = e.MarginBounds.Top;
+
+            float wCode = 110, wQty = 70, wPrice = 100;
+            float wName = width - wCode - wQty - wPrice;
+
+            using (Font fTitle = new Font("Arial", 14, FontStyle.Bold))
+            using (Font f = new Font("Arial", 10))
+            using (Font fb = new Font("Arial", 10, FontStyle.Bold))
+            using (var fmtL = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap})
+            using (var fmtR = new StringFormat { Trimming = StringTrimming.EllipsisCharacter, FormatFlags = StringFormatFlags.NoWrap, Alignment = StringAlignment.Far})
+            {
+                float lineH = f.GetHeight(g) + 6;
+
+                if(printIndex == 0)
+                {
+                    g.DrawString("STOCK COUNT", fTitle, Brushes.Black, Left, y);
+                    y += fTitle.GetHeight(g) + 4;
+                    g.DrawString("Unit No : " + cls_DbCreate.GetUnit_No() + "  " + DateTime.Now.ToString("dd-MM-yyyy HH:mm"), f, Brushes.Black, left, y);
+                    y += lineH;
+                    g.DrawLine(Pens.Black, left, y, left + width, y);
+                    y += 4;
+
+                    while (printIndex < printData.Rows.Count && y + lineH * 3 <e.MarginBounds.Bottom)
+                    {
+                        DataRow r = printData.Rows[printIndex];
+                        g.DrawString(r["Prod_Code"].ToString(), f, Brushes.Black, new RectangleF(left, y, wCode, lineH), fmtL);
+                        g.DrawString(r["Prod_Name"].ToString(), f, Brushes.Black, new RectangleF(left + wCode, y, wName, lineH), fmtL);
+                        g.DrawString(ToD(r["Qty"]).ToString("0.##"), f, Brushes.Black, new RectangleF(left + wCode + wName, y, wQty,lineH), fmtR);
+                        g.DrawString(ToD(r["Selling_Price"]).ToString("N2"), f, Brushes.Black, new RectangleF(left + wCode + wName + wQty, y, wPrice, lineH), fmtR);
+
+                        y += lineH;
+                        printIndex++;
+                    }
+                    if(printIndex < printData.Rows.Count)
+                    {
+                        e.HasMorePages = true;
+                        return;
+                    }
+
+                    g.DrawLine(Pens.Black, left, y, left + width, y);
+                    y += 4;
+                    g.DrawString("Sub Total :", fb, Brushes.Black, new RectangleF(left + wCode, y, wName + wQty, lineH), fmtR);
+                    g.DrawString(printSubTotal.ToString("N2"), fb, Brushes.Black, new RectangleF(left + wCode + wName + wQty, y, wPrice, lineH), fmtR);
+
+                    e.HasMorePages = false;
+                }
+            }
+        }
+    }
+}
