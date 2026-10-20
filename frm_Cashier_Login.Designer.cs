@@ -169,7 +169,6 @@
             // 
             this.panelBack.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(227)))), ((int)(((byte)(230)))));
             this.panelBack.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelBack.Controls.Add(this.panelFront);
             this.panelBack.Controls.Add(this.btn_flip);
             this.panelBack.Controls.Add(this.button36);
             this.panelBack.Controls.Add(this.button27);
@@ -195,10 +194,11 @@
             this.panelBack.Controls.Add(this.button3);
             this.panelBack.Controls.Add(this.button2);
             this.panelBack.Controls.Add(this.button1);
-            this.panelBack.Location = new System.Drawing.Point(1, 174);
+            this.panelBack.Location = new System.Drawing.Point(1, 182);
             this.panelBack.Name = "panelBack";
             this.panelBack.Size = new System.Drawing.Size(816, 292);
             this.panelBack.TabIndex = 1;
+            this.panelBack.Visible = false;
             // 
             // panelFront
             // 
@@ -249,11 +249,10 @@
             this.panelFront.Controls.Add(this.button87);
             this.panelFront.Controls.Add(this.button88);
             this.panelFront.Controls.Add(this.button89);
-            this.panelFront.Location = new System.Drawing.Point(1, 2);
+            this.panelFront.Location = new System.Drawing.Point(1, 182);
             this.panelFront.Name = "panelFront";
             this.panelFront.Size = new System.Drawing.Size(816, 292);
             this.panelFront.TabIndex = 48;
-            this.panelFront.Visible = false;
             // 
             // btn_symbol
             // 
@@ -1099,8 +1098,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(819, 486);
-            this.Controls.Add(this.panelBack);
+            this.Controls.Add(this.panelFront);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelBack);
             this.Name = "frm_Cashier_Login";
             this.Text = "frm_Cashier_Login";
             this.panel1.ResumeLayout(false);
