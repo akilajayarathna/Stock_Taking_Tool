@@ -38,12 +38,12 @@
             this.txt_Servername = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txt_Unit_No = new System.Windows.Forms.TextBox();
-            this.btn_Save = new System.Windows.Forms.Button();
+            this.btn_Cheack_MachineID = new System.Windows.Forms.Button();
             this.txt_Machine_id = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.btn_Cheack_MachineID = new System.Windows.Forms.Button();
+            this.btn_Save = new System.Windows.Forms.Button();
+            this.txt_Unit_No = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -65,6 +65,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(3, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -79,22 +80,25 @@
             this.tabPage1.Controls.Add(this.btn_Test_Connection);
             this.tabPage1.Controls.Add(this.txt_Servername);
             this.tabPage1.Controls.Add(this.label1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(911, 276);
+            this.tabPage1.Size = new System.Drawing.Size(911, 272);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main DB Setting";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btn_Save_Connection
             // 
-            this.btn_Save_Connection.Location = new System.Drawing.Point(462, 153);
+            this.btn_Save_Connection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btn_Save_Connection.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Save_Connection.ForeColor = System.Drawing.Color.White;
+            this.btn_Save_Connection.Location = new System.Drawing.Point(508, 153);
             this.btn_Save_Connection.Name = "btn_Save_Connection";
-            this.btn_Save_Connection.Size = new System.Drawing.Size(134, 44);
+            this.btn_Save_Connection.Size = new System.Drawing.Size(217, 53);
             this.btn_Save_Connection.TabIndex = 9;
             this.btn_Save_Connection.Text = "Save Connection";
-            this.btn_Save_Connection.UseVisualStyleBackColor = true;
+            this.btn_Save_Connection.UseVisualStyleBackColor = false;
             this.btn_Save_Connection.Click += new System.EventHandler(this.btn_Save_Connection_Click);
             // 
             // txt_Databese
@@ -108,21 +112,24 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(25, 99);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 25);
+            this.label2.Size = new System.Drawing.Size(117, 25);
             this.label2.TabIndex = 3;
             this.label2.Text = "Database :";
             // 
             // btn_Test_Connection
             // 
-            this.btn_Test_Connection.Location = new System.Drawing.Point(304, 153);
+            this.btn_Test_Connection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
+            this.btn_Test_Connection.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Test_Connection.ForeColor = System.Drawing.Color.White;
+            this.btn_Test_Connection.Location = new System.Drawing.Point(237, 153);
             this.btn_Test_Connection.Name = "btn_Test_Connection";
-            this.btn_Test_Connection.Size = new System.Drawing.Size(134, 44);
+            this.btn_Test_Connection.Size = new System.Drawing.Size(217, 53);
             this.btn_Test_Connection.TabIndex = 2;
             this.btn_Test_Connection.Text = "Test Connection";
-            this.btn_Test_Connection.UseVisualStyleBackColor = true;
+            this.btn_Test_Connection.UseVisualStyleBackColor = false;
             this.btn_Test_Connection.Click += new System.EventHandler(this.btn_Test_Connection_Click);
             // 
             // txt_Servername
@@ -136,10 +143,10 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(25, 37);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 25);
+            this.label1.Size = new System.Drawing.Size(151, 25);
             this.label1.TabIndex = 0;
             this.label1.Text = "Server Name :";
             // 
@@ -151,46 +158,31 @@
             this.tabPage2.Controls.Add(this.btn_Save);
             this.tabPage2.Controls.Add(this.txt_Unit_No);
             this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(911, 276);
+            this.tabPage2.Size = new System.Drawing.Size(911, 272);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Unit Details Setting";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // btn_Cheack_MachineID
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(22, 29);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 25);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Unit No :";
-            // 
-            // txt_Unit_No
-            // 
-            this.txt_Unit_No.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Unit_No.Location = new System.Drawing.Point(217, 29);
-            this.txt_Unit_No.Name = "txt_Unit_No";
-            this.txt_Unit_No.Size = new System.Drawing.Size(545, 30);
-            this.txt_Unit_No.TabIndex = 1;
-            // 
-            // btn_Save
-            // 
-            this.btn_Save.Location = new System.Drawing.Point(217, 151);
-            this.btn_Save.Name = "btn_Save";
-            this.btn_Save.Size = new System.Drawing.Size(81, 41);
-            this.btn_Save.TabIndex = 2;
-            this.btn_Save.Text = "Save";
-            this.btn_Save.UseVisualStyleBackColor = true;
-            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            this.btn_Cheack_MachineID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(51)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
+            this.btn_Cheack_MachineID.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Cheack_MachineID.ForeColor = System.Drawing.Color.White;
+            this.btn_Cheack_MachineID.Location = new System.Drawing.Point(763, 64);
+            this.btn_Cheack_MachineID.Name = "btn_Cheack_MachineID";
+            this.btn_Cheack_MachineID.Size = new System.Drawing.Size(136, 61);
+            this.btn_Cheack_MachineID.TabIndex = 5;
+            this.btn_Cheack_MachineID.Text = "Check Machine Id";
+            this.btn_Cheack_MachineID.UseVisualStyleBackColor = false;
+            this.btn_Cheack_MachineID.Click += new System.EventHandler(this.btn_Cheack_MachineID_Click);
             // 
             // txt_Machine_id
             // 
             this.txt_Machine_id.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Machine_id.Location = new System.Drawing.Point(217, 79);
+            this.txt_Machine_id.Location = new System.Drawing.Point(194, 79);
             this.txt_Machine_id.Name = "txt_Machine_id";
             this.txt_Machine_id.Size = new System.Drawing.Size(545, 30);
             this.txt_Machine_id.TabIndex = 4;
@@ -205,22 +197,43 @@
             this.label4.TabIndex = 3;
             this.label4.Text = "Machine Id :";
             // 
-            // btn_Cheack_MachineID
+            // btn_Save
             // 
-            this.btn_Cheack_MachineID.Location = new System.Drawing.Point(768, 82);
-            this.btn_Cheack_MachineID.Name = "btn_Cheack_MachineID";
-            this.btn_Cheack_MachineID.Size = new System.Drawing.Size(136, 30);
-            this.btn_Cheack_MachineID.TabIndex = 5;
-            this.btn_Cheack_MachineID.Text = "Cheack Machine Id";
-            this.btn_Cheack_MachineID.UseVisualStyleBackColor = true;
-            this.btn_Cheack_MachineID.Click += new System.EventHandler(this.btn_Cheack_MachineID_Click);
+            this.btn_Save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(99)))), ((int)(((byte)(235)))));
+            this.btn_Save.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Save.ForeColor = System.Drawing.Color.White;
+            this.btn_Save.Location = new System.Drawing.Point(194, 151);
+            this.btn_Save.Name = "btn_Save";
+            this.btn_Save.Size = new System.Drawing.Size(217, 53);
+            this.btn_Save.TabIndex = 2;
+            this.btn_Save.Text = "Save";
+            this.btn_Save.UseVisualStyleBackColor = false;
+            this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
+            // 
+            // txt_Unit_No
+            // 
+            this.txt_Unit_No.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Unit_No.Location = new System.Drawing.Point(194, 29);
+            this.txt_Unit_No.Name = "txt_Unit_No";
+            this.txt_Unit_No.Size = new System.Drawing.Size(217, 30);
+            this.txt_Unit_No.TabIndex = 1;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(22, 29);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(96, 25);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Unit No :";
             // 
             // tabPage3
             // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(911, 276);
+            this.tabPage3.Size = new System.Drawing.Size(911, 272);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Local Database Setting";
             this.tabPage3.UseVisualStyleBackColor = true;

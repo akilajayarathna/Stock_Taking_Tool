@@ -16,5 +16,17 @@ namespace Stock_Taking_Tool
         {
             InitializeComponent();
         }
+
+        private void btn_symbol_Click(object sender, EventArgs e)
+        {
+            panelFront.Hide();
+            panelBack.Show();
+        }
+
+        private void btn_flip_Click(object sender, EventArgs e)
+        {
+            panelBack.Hide();
+            panelFront.Show();
+        }
     }
 }

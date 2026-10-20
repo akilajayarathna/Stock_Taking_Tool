@@ -54,5 +54,17 @@ namespace Stock_Taking_Tool
         {
             DialogResult = DialogResult.Cancel;
         }
+
+        private void btn_flip_Click(object sender, EventArgs e)
+        {
+            panelBack.Hide();
+            panelFront.Show();
+        }
+
+        private void btn_symbol_Click(object sender, EventArgs e)
+        {
+            panelFront.Hide();
+            panelBack.Show();
+        }
     }
 }
